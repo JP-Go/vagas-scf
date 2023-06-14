@@ -1,9 +1,16 @@
+var data = require("./fakeData");
+const accessController = require("./accessControl");
+const { validateStringField } = require("./validators");
+const { toTitleCase } = require("./utils");
 
+module.exports = function (req, res) {
+  var { name } = req.query;
+  if (!validateStringField(name)) {
+    res.status(400).json({
+      message: "User not found",
+    });
+  }
+  const numOfVisits = accessController.getVisitsByUserName(name);
 
-module.exports = function(req, res){
-    
-    var name =  req.query.name;
-
-    res.send("Usuário " +  name  + "  foi lido 0 vezes.");
-
+  res.send(`Usuário ${toTitleCase(name)} foi lido ${numOfVisits} vezes."`);
 };

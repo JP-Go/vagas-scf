@@ -1,5 +1,5 @@
 var data = require("./fakeData");
-const { validateUserData } = require("./utils");
+const { validateUserData } = require("./validators");
 
 module.exports = function (req, res) {
   const [errors, validatedUserData] = validateUserData(req.body);
