@@ -2,14 +2,15 @@ var data =  require("./fakeData");
 
 module.exports = function(req, res){
   
-    var name =  req.body.name;
-    var jov =  req.body.job;
+    const {name,job} =  req.body.name;
+    const nameValid = name !== undefined && typeof name === "string"
     
-    var newUser = {
-        name: name,
-        job: job,
+    const lastId = Math.max.apply(null,data.map(u => u.id))
+    const newUser = {
+        id: ++lastId
+        name,
+        job,
     }
-
     data.push(newUser)
     
     res.send(newUser);
