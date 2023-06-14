@@ -1,6 +1,7 @@
-const accessController = require("./accessControl");
 var data = require("./fakeData");
+const accessController = require("./accessControl");
 const { validateStringField } = require("./validators");
+const { toTitleCase } = require("./utils");
 
 module.exports = function (req, res) {
   var { name } = req.query;
@@ -11,5 +12,5 @@ module.exports = function (req, res) {
   }
   const numOfVisits = accessController.getVisitsByUserName(name);
 
-  res.send(`Usuário ${name} foi lido ${numOfVisits} vezes."`);
+  res.send(`Usuário ${toTitleCase(name)} foi lido ${numOfVisits} vezes."`);
 };
