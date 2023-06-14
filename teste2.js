@@ -1,14 +1,8 @@
 var data = require("./fakeData");
-const { validateStringField } = require("./utils");
+const { validateUserData } = require("./utils");
 
 module.exports = function (req, res) {
-  const { name, job } = req.body;
-  const errors = [];
-  if (!validateStringField(name))
-    errors.push("Invalid name. Name must be a string with a least 1 character");
-
-  if (!validateStringField(job))
-    errors.push("Invalid job. Job must be a string with a least 1 character");
+  const [errors, validatedUserData] = validateUserData(req.body);
 
   if (errors.length > 0) {
     return res.status(400).json({
@@ -22,6 +16,9 @@ module.exports = function (req, res) {
     null,
     data.map((u) => u.id)
   );
+
+  const { name, job } = validatedUserData;
+
   const newUser = {
     id: ++lastId,
     name,
