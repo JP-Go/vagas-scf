@@ -3,14 +3,15 @@ var data = require("./fakeData");
 module.exports = function (req, res) {
   const { name } = req.query;
 
-  const maybeUser = data.find(
+  const userIndex = data.findIndex(
     (u) => u.name.toLowerCase() === name.toLowerCase()
   );
-  if (!maybeUser)
-    res.status(400).json({
-      message: "User was not found",
+  if (userIndex < 0) {
+    return res.status(400).json({
+      message: "User not found. Check the name given and try again",
     });
-  data = data.filter((u) => u === maybeUser);
+  }
+  data.splice(userIndex, 1);
 
   res.send("success");
 };
