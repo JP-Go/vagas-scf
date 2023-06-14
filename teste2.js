@@ -24,7 +24,11 @@ module.exports = function (req, res) {
     });
   }
 
-  let lastId = Math.max(data.map((u) => u.id));
+  // truque para aplicar a função max em um array
+  let lastId = Math.max.apply(
+    null,
+    data.map((u) => u.id)
+  );
   const newUser = {
     id: ++lastId,
     name,
