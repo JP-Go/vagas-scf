@@ -1,15 +1,16 @@
-var data =  require("./fakeData");
+var data = require("./fakeData");
 
-module.exports = function(req, res) {
-  
-    var name =  req.query.name;
+module.exports = function (req, res) {
+  const { name } = req.query;
 
-    for(let i = 0; i < data.length;  i++) {
-        if(i.name == name) {
-            data[i] = null;
-        }
-    }
+  const maybeUser = data.find(
+    (u) => u.name.toLowerCase() === name.toLowerCase()
+  );
+  if (!maybeUser)
+    res.status(400).json({
+      message: "User was not found",
+    });
+  data = data.filter((u) => u === maybeUser);
 
-    res.send("success");
-
+  res.send("success");
 };
