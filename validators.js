@@ -37,4 +37,5 @@ function validateUserData(data) {
 module.exports = {
   validateUserData,
   validateNumberField,
+  validateStringField,
 };
