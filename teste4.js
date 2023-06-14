@@ -1,5 +1,5 @@
 var data = require("./fakeData");
-const { validateNumberField, validateUserData } = require("./utils");
+const { validateNumberField, validateUserData } = require("./validators");
 module.exports = function (req, res) {
   const { id } = req.query;
 
