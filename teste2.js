@@ -1,12 +1,5 @@
 var data = require("./fakeData");
-
-function validateStringField(maybeValid) {
-  return (
-    maybeValid !== undefined &&
-    typeof maybeValid === "string" &&
-    maybeValid.length > 0
-  );
-}
+const { validateStringField } = require("./utils");
 
 module.exports = function (req, res) {
   const { name, job } = req.body;
